@@ -47,13 +47,9 @@
         
                 <!-- Kolom Kanan -->
                 <div class="right-column" style="flex: 1;">
-                    <div class="form-group">
+                <div class="form-group">
                         <label for="vga">VGA</label>
                         <input type="text" id="vga" class="form-control" placeholder="Masukkan VGA" name="vga" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="storage">Storage</label>
-                        <input type="text" id="storage" class="form-control" placeholder="Masukkan Storage" name="kapasitas_penyimpanan" required>
                     </div>
                     <div class="form-group">
                         <label for="storage-type">Storage Type</label>
@@ -61,8 +57,25 @@
                             <option value="">Pilih Tipe Penyimpanan</option>
                             <option value="hdd">HDD</option>
                             <option value="ssd">SSD</option>
+                            <option value="hybrid">Hybrid</option>
                         </select>
                     </div>
+
+                    <div class="form-group" id="storage-field">
+                        <label for="storage">Storage</label>
+                        <input type="text" id="storage" class="form-control" placeholder="Masukkan Storage" name="kapasitas_penyimpanan" required>
+                    </div>
+                    
+                    <div class="form-group" id="hdd-capacity" style="display:none;">
+                        <label for="hdd">HDD Capacity</label>
+                        <input type="text" id="hdd" class="form-control" placeholder="Masukkan Kapasitas HDD" name="hdd" />
+                    </div>
+
+                    <div class="form-group" id="ssd-capacity" style="display:none;">
+                        <label for="ssd">SSD Capacity</label>
+                        <input type="text" id="ssd" class="form-control" placeholder="Masukkan Kapasitas SSD" name="ssd" />
+                    </div>
+
                     <div class="form-group">
                         <label for="monitor">Monitor</label>
                         <input type="text" id="monitor" class="form-control" placeholder="Masukkan Monitor" name="monitor" required>
@@ -71,12 +84,58 @@
             </div>
         
             <div class="action-btn">
-                <a class="cancel-btn" href="{{ url('/Ruang3/asset') }}">Cancel</a>        
+                <a class="cancel-btn" href="{{ url('/Ruang4/asset') }}">Cancel</a>        
                 <button type="submit" class="add-btn">Create</button>
             </div>
-        </form>
+        </form>            
     </div>
 </section>
 
-<script src="{{ asset('js/create.js') }}"></script> 
+<script src="{{ asset('js/create.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var storageType = document.getElementById('storage-type');
+        var hddCapacity = document.getElementById('hdd-capacity');
+        var ssdCapacity = document.getElementById('ssd-capacity');
+        var storageField = document.getElementById('storage-field');
+        var storageInput = document.getElementById('storage');
+        var hddInput = document.getElementById('hdd');
+        var ssdInput = document.getElementById('ssd');
+        
+        toggleHybridFields(storageType.value);
+        
+        storageType.addEventListener('change', function () {
+            toggleHybridFields(storageType.value);
+        });
+        
+        var createForm = document.getElementById('createForm');
+        createForm.addEventListener('submit', function() {
+            if (storageType.value === 'hybrid') {
+                storageInput.value = `${hddInput.value} hdd dan ${ssdInput.value} ssd`;
+            }
+        });
+        
+        function toggleHybridFields(value) {
+            storageInput.removeAttribute('required');
+            hddInput.removeAttribute('required');
+            ssdInput.removeAttribute('required');
+
+            if (value === 'hybrid') {
+                hddCapacity.style.display = 'block';
+                ssdCapacity.style.display = 'block';
+                storageField.style.display = 'none';
+
+                hddInput.setAttribute('required', 'required');
+                ssdInput.setAttribute('required', 'required');
+            } else {
+                hddCapacity.style.display = 'none';
+                ssdCapacity.style.display = 'none';
+                storageField.style.display = 'block';
+
+                storageInput.setAttribute('required', 'required');
+            }
+        }
+    });
+
+</script>
 @endsection

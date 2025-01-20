@@ -48,9 +48,8 @@ class Ruang1Controller extends Controller
             'processor' => 'required|string|max:255',
             'ram' => 'required|in:2GB,4GB,8GB,16GB,32GB',
             'vga' => 'required|string|max:255',
-            'kapasitas_penyimpanan' => 'required|string|max:255',
-            'tipe_penyimpanan' => 'required|in:hdd,ssd',
             'monitor' => 'required|string|max:255',
+            'tipe_penyimpanan' => 'required|in:hdd,ssd,hybrid',
         ]);
 
         $asset = new Asset();
@@ -58,8 +57,6 @@ class Ruang1Controller extends Controller
         $asset->processor = $request->processor;
         $asset->ram = $request->ram;
         $asset->vga = $request->vga;
-        $asset->kapasitas_penyimpanan = $request->kapasitas_penyimpanan;
-        $asset->tipe_penyimpanan = $request->tipe_penyimpanan;
         $asset->monitor = $request->monitor;
         $asset->id_ruangan = 1;
         $currentUser = Auth::user();
@@ -67,6 +64,14 @@ class Ruang1Controller extends Controller
         $asset->createdDate = now();
         $asset->updatedBy = null;
         $asset->updatedDate = null;
+
+        if ($request->tipe_penyimpanan == 'hybrid') {
+            $asset->kapasitas_penyimpanan = $request->hdd . ' hdd dan ' . $request->ssd . ' ssd';
+        } else {
+            $asset->kapasitas_penyimpanan = $request->kapasitas_penyimpanan;
+        }
+
+        $asset->tipe_penyimpanan = $request->tipe_penyimpanan;
         $asset->save();
 
         return redirect()->route('Ruang1.asset');
@@ -87,7 +92,7 @@ class Ruang1Controller extends Controller
             'ram' => 'required|in:2GB,4GB,8GB,16GB,32GB',
             'vga' => 'required|string|max:255',
             'kapasitas_penyimpanan' => 'required|string|max:255',
-            'tipe_penyimpanan' => 'required|in:hdd,ssd',
+            'tipe_penyimpanan' => 'required|in:hdd,ssd,hybrid',
             'monitor' => 'required|string|max:255',
         ]);
 
@@ -97,9 +102,13 @@ class Ruang1Controller extends Controller
         $asset->processor = $request->processor;
         $asset->ram = $request->ram;
         $asset->vga = $request->vga;
-        $asset->kapasitas_penyimpanan = $request->kapasitas_penyimpanan;
-        $asset->tipe_penyimpanan = $request->tipe_penyimpanan;
         $asset->monitor = $request->monitor;
+        if ($request->tipe_penyimpanan == 'hybrid') {
+            $asset->kapasitas_penyimpanan = $request->hdd . ' hdd dan ' . $request->ssd . ' ssd';
+        } else {
+            $asset->kapasitas_penyimpanan = $request->kapasitas_penyimpanan; 
+        }
+        $asset->tipe_penyimpanan = $request->tipe_penyimpanan;
         $currentUser = Auth::user();
         $asset->updatedBy = $currentUser->username;
         $asset->updatedDate = now();
@@ -119,4 +128,4 @@ class Ruang1Controller extends Controller
         ]);
     }
     
-}
+} 

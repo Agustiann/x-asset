@@ -49,16 +49,29 @@
                         <label for="vga">VGA</label>
                         <input type="text" id="vga" class="form-control" placeholder="Masukkan VGA" value="{{ $asset->vga }}" name="vga" required>
                     </div>
-                    <div class="form-group">
-                        <label for="storage">Storage</label>
-                        <input type="text" id="storage" class="form-control" placeholder="Masukkan Storage" value="{{ $asset->kapasitas_penyimpanan }}" name="kapasitas_penyimpanan" required>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="storage-type">Storage Type</label>
                         <select id="storage-type" class="form-control" name="tipe_penyimpanan" required>
                             <option value="hdd" {{ $asset->tipe_penyimpanan == 'hdd' ? 'selected' : '' }}>HDD</option>
                             <option value="ssd" {{ $asset->tipe_penyimpanan == 'ssd' ? 'selected' : '' }}>SSD</option>
+                            <option value="hybrid" {{ $asset->tipe_penyimpanan == 'hybrid' ? 'selected' : '' }}>Hybrid</option>
                         </select>
+                    </div>
+                    <div class="form-group" id="storage-field">
+                        <label for="storage">Storage</label>
+                        <input type="text" id="storage" class="form-control" placeholder="Masukkan Storage" 
+                            value="{{ $asset->tipe_penyimpanan == 'hybrid' ? '' : $asset->kapasitas_penyimpanan }}" 
+                            name="kapasitas_penyimpanan" required>
+                    </div>
+                    <div class="form-group" id="hdd-capacity" style="display:none;">
+                        <label for="hdd">HDD Capacity</label>
+                        <input type="text" id="hdd" class="form-control" placeholder="Masukkan Kapasitas HDD" name="hdd" value="{{ (strpos($asset->kapasitas_penyimpanan, 'hdd') !== false) ? explode(' dan ', $asset->kapasitas_penyimpanan)[0] : '' }}" />
+                    </div>
+
+                    <div class="form-group" id="ssd-capacity" style="display:none;">
+                        <label for="ssd">SSD Capacity</label>
+                        <input type="text" id="ssd" class="form-control" placeholder="Masukkan Kapasitas SSD" name="ssd" value="{{ (strpos($asset->kapasitas_penyimpanan, 'ssd') !== false) ? explode(' dan ', explode(' hdd dan ', $asset->kapasitas_penyimpanan)[1])[0] : '' }}" />
                     </div>
                     <div class="form-group">
                         <label for="monitor">Monitor</label>
@@ -73,6 +86,33 @@
         </form>
     </div>
 </section>
-{{-- 
-<script src="{{ asset('js/edit.js') }}"></script>  --}}
+
+<script src="{{ asset('js/edit.js') }}"></script> 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var storageType = document.getElementById('storage-type');
+        var hddCapacity = document.getElementById('hdd-capacity');
+        var ssdCapacity = document.getElementById('ssd-capacity');
+        var storageField = document.getElementById('storage-field');
+
+        toggleHybridFields(storageType.value);
+
+        storageType.addEventListener('change', function () {
+            toggleHybridFields(storageType.value);
+        });
+
+        function toggleHybridFields(value) {
+            if (value === 'hybrid') {
+                hddCapacity.style.display = 'block';
+                ssdCapacity.style.display = 'block';
+                storageField.style.display = 'none';
+            } else {
+                hddCapacity.style.display = 'none';
+                ssdCapacity.style.display = 'none';
+                storageField.style.display = 'block';
+            }
+        }
+    });
+
+</script>
 @endsection

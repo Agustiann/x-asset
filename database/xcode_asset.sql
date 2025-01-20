@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2024 at 04:54 PM
+-- Generation Time: Jan 09, 2025 at 05:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -152,8 +152,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('kyIZuWdc7wcUcKHlBqWy5bVn3PjfHJISkypoiG1d', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaERPcjVNejdSOHVLN0hsR25vajFGcXBFZkhZZmlLUllxU1NUYkxwZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1734933958),
-('UFD7k1C0KiG1EX1xdXvPQlEWzeRIOIORFvezkkmE', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoid2VoYkUwS1kyeGtFZVkwNmNqVmZkYmtwMVFTU1M0SDBSRFlrR1ZidiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1735132056);
+('eGBJ2ZeGDujPhRVoMi8KQ1mjYgqO7BHMOwUx5GSp', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidU9tZ2xaemdQdGcwcGhkeGtSaXJJMXE4d09sMlYxeWU5Yk5VRldPayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1736398769);
 
 -- --------------------------------------------------------
 
@@ -213,8 +212,8 @@ CREATE TABLE `xcode_asset` (
   `status` enum('active','inActive') NOT NULL,
   `createdBy` varchar(191) NOT NULL,
   `createdDate` datetime NOT NULL,
-  `updatedBy` varchar(191) NOT NULL,
-  `updatedDate` datetime NOT NULL,
+  `updatedBy` varchar(255) DEFAULT NULL,
+  `updatedDate` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `id_ruangan` bigint(20) UNSIGNED NOT NULL
@@ -225,12 +224,24 @@ CREATE TABLE `xcode_asset` (
 --
 
 INSERT INTO `xcode_asset` (`id`, `nama_pc`, `processor`, `ram`, `vga`, `kapasitas_penyimpanan`, `tipe_penyimpanan`, `monitor`, `status`, `createdBy`, `createdDate`, `updatedBy`, `updatedDate`, `created_at`, `updated_at`, `id_ruangan`) VALUES
-(1, 'PC 1', 'Intel Core i7', '4GB', 'NVIDIA GTX 1080', '1TB', 'hdd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:29:51', 'admin', '2024-12-23 03:49:13', NULL, NULL, 1),
-(2, 'PC 2', 'AMD Ryzen 7', '8GB', 'NVIDIA GTX 1080', '1TB', 'ssd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:32:54', 'admin', '2024-12-18 15:51:08', NULL, NULL, 2),
-(3, 'PC 3', 'Intel Core i9', '16GB', 'NVIDIA GTX 1080', '2TB', 'ssd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:32:54', '', '2024-12-17 14:32:54', NULL, NULL, 3),
-(7, 'PC 4', 'Intel Core i5', '4GB', 'NVIDIA GTX 1080', '512GB', 'hdd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:39:48', 'admin', '2024-12-18 16:34:49', NULL, NULL, 4),
-(8, 'PC 10', 'AMD', '8GB', 'NVIDIA', '256GB', 'ssd', 'LG', 'active', 'admin', '2024-12-18 03:58:48', 'admin', '2024-12-18 03:58:48', NULL, NULL, 1),
-(13, 'PC 2B', 'Intel', '8GB', 'NVIDIA1', '256GB', 'ssd', 'LG 30 inch', 'active', 'admin', '2024-12-18 15:56:37', 'admin', '2024-12-23 03:50:10', NULL, NULL, 2);
+(1, 'PC 1', 'Intel Core i7', '4GB', 'NVIDIA GTX 1080', '1TB', 'hdd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:29:51', 'admin1', '2025-01-06 02:51:36', NULL, NULL, 1),
+(2, 'PC 2', 'AMD Ryzen 7', '8GB', 'NVIDIA GTX 1080', '1TB', 'ssd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:32:54', 'admin', '2024-12-30 04:48:44', NULL, NULL, 2),
+(3, 'PC 3', 'Intel Core i9', '16GB', 'NVIDIA GTX 1080', '2TB', 'ssd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:32:54', 'admin', '2024-12-30 04:51:59', NULL, NULL, 3),
+(7, 'PC 4', 'Intel Core i7', '4GB', 'NVIDIA GTX 1080', '512GB', 'hdd', 'Dell 24 Inch', 'active', '', '2024-12-17 14:39:48', 'admin', '2024-12-30 04:52:17', NULL, NULL, 4),
+(8, 'PC 10', 'AMD', '8GB', 'NVIDIA', '256GB', 'hdd', 'LG', 'active', 'admin', '2024-12-18 03:58:48', 'admin', '2024-12-29 14:04:08', NULL, NULL, 1),
+(17, 'PC 2C', 'Intel core i9', '8GB', 'NVIDIA', '1TB', 'hdd', 'LG', 'active', 'admin', '2024-12-30 04:05:48', 'admin', '2024-12-30 04:05:48', NULL, NULL, 1),
+(18, 'PC 2D', 'Intel', '4GB', 'NVIDIA', '1TB', 'hdd', 'LG', 'active', 'admin', '2024-12-30 04:11:38', 'admin', '2024-12-30 04:11:38', NULL, NULL, 1),
+(19, 'PC 2E', 'amd', '2GB', 'NVIDIA', '1TB', 'hdd', 'Dell', 'active', 'admin', '2024-12-30 04:15:31', 'admin', '2024-12-30 04:15:31', NULL, NULL, 2),
+(20, 'PC 2E', 'amd', '8GB', 'NVIDIA', '512GB', 'hdd', 'LG', 'active', 'admin', '2024-12-30 04:20:56', 'admin', '2024-12-30 04:20:56', NULL, NULL, 2),
+(21, 'PC 2F', 'amd', '4GB', 'NVIDIA', '1TB', 'ssd', 'Dell', 'active', 'admin', '2024-12-30 04:26:30', 'admin', '2024-12-30 04:26:30', NULL, NULL, 2),
+(22, 'PC 3F', 'amd', '2GB', 'NVIDIA', '1TB', 'hdd', 'LG', 'active', 'admin', '2024-12-30 04:30:39', 'admin', '2024-12-30 04:30:39', NULL, NULL, 3),
+(23, 'PC 1E', 'amd', '2GB', 'NVIDIA', '1TB', 'hdd', 'Dell', 'active', 'admin', '2024-12-30 04:34:54', 'admin', '2024-12-30 04:34:54', NULL, NULL, 1),
+(24, 'PC 4a', 'amd', '4GB', 'NVIDIA', '1TB', 'hdd', 'LG', 'active', 'admin', '2024-12-30 04:38:52', 'admin', '2024-12-30 04:38:52', NULL, NULL, 4),
+(25, 'sasa', 'sA', '8GB', 'as', 'SA', 'hdd', 'saA', 'active', 'admin', '2024-12-30 04:40:00', 'admin', '2024-12-30 04:40:00', NULL, NULL, 2),
+(26, 'asdsd', 'dadaw', '8GB', 'adadwd', 'awdwa', 'hdd', 'dwa', 'active', 'admin', '2024-12-30 04:40:33', 'admin', '2024-12-30 04:40:33', NULL, NULL, 3),
+(27, 'PC 1Z', 'amd', '4GB', 'NVIDIA', '1Tb', 'ssd', 'LG', 'active', 'admin', '2024-12-30 05:38:54', 'admin', '2024-12-30 05:38:54', NULL, NULL, 1),
+(28, 'PC 001', 'amd', '4GB', 'NVIDIA', '1TB', 'ssd', 'LG', 'active', 'admin', '2025-01-06 02:35:39', 'admin', '2025-01-06 02:36:18', NULL, NULL, 1),
+(29, 'PC 007', 'amd', '4GB', 'NVIDIA', '1TB', 'hdd', 'LG', 'active', 'admin1', '2025-01-06 02:51:01', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -382,7 +393,7 @@ ALTER TABLE `xcode_admin`
 -- AUTO_INCREMENT for table `xcode_asset`
 --
 ALTER TABLE `xcode_asset`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `xcode_ruangan`
