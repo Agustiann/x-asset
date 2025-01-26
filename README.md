@@ -64,4 +64,47 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# x-asset
+
+
+# XCODE-ASSET
+
+X-Asset adalah sistem informasi yang dirancang untuk mengelola data 
+komputer beserta spesifikasinya yang dimiliki oleh PT Teknologi Server Indonesia 
+(X-Code). Sistem ini berfungsi sebagai platform pencatatan dan pengelolaan daftar 
+komputer kantor, mencakup informasi rinci seperti jenis perangkat, spesifikasi 
+hardware, lokasi penempatan, serta status penggunaannya.
+
+## Instalasi
+
+- PHP
+- Xampp
+- Composer
+
+### 1. Download dan Install PHP
+
+https://www.php.net/downloads.php
+
+### 2. Download dan Install Composer
+
+https://getcomposer.org/download/
+```sh
+composer install
+```
+
+### 3. Jalankan Migration
+```sh
+php artisan migrate
+```
+
+### 4. Jalankan Seeder
+
+```sh
+php artisan db:seed
+```
+
+### 5. Jalankan Aplikasi
+
+```sh
+php artisan serve
+```
+
