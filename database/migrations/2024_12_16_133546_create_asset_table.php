@@ -23,8 +23,8 @@ return new class extends Migration
             $table->enum('status', ['active', 'inActive']);
             $table->string('createdBy');
             $table->dateTime('createdDate');
-            $table->string('updatedBy');
-            $table->dateTime('updatedDate');
+            $table->string('updatedBy')->nullable();
+            $table->dateTime('updatedDate')->nullable();
             $table->timestamps();
 
             $table->foreignId('id_ruangan')->constrained('xcode_ruangan')->onDelete('cascade');
