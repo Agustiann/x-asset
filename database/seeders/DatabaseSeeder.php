@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CreateAdminSeeder::class,
+            CreateRuanganSeeder::class,
         ]);
 
         User::factory()->create([
