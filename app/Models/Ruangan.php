@@ -15,6 +15,8 @@ class Ruangan extends Model
         'status',
         'createdBy',
         'updatedBy',
+        'createdDate',
+        'updatedDate',
     ];
 
 
