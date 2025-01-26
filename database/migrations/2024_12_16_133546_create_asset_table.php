@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('ram', ['2GB', '4GB', '8GB', '16GB', '32GB']);
             $table->string('vga');
             $table->string('kapasitas_penyimpanan');
-            $table->enum('tipe_penyimpanan', ['hdd', 'ssd']);
+            $table->enum('tipe_penyimpanan', ['hdd', 'ssd', 'hybrid']);
             $table->string('monitor');
             $table->enum('status', ['active', 'inActive']);
             $table->string('createdBy');
