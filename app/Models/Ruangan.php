@@ -10,6 +10,13 @@ class Ruangan extends Model
     use HasFactory;
 
     protected $table = 'xcode_ruangan';
+    protected $fillable = [
+        'nama_ruangan',
+        'status',
+        'createdBy',
+        'updatedBy',
+    ];
+
 
     public function assets()
     {
